@@ -4,6 +4,7 @@ import sys
 # the total time (10 per floor) and all the floors that were traveled to
 #   :param _startingFloor: the starting floor number
 #   :param _listOfFloors: the number of all the floors to be traveled to, pass in as an array
+#   :returns: Total travel time (int) and list of floors traveled to (integer array)
 def runElevator(_startingFloor, _listOfFloors):
 
     totalTravelTime = 0
@@ -26,8 +27,9 @@ def runElevator(_startingFloor, _listOfFloors):
 ############### Utility Functions ###############3
 
 # Validation function that validates system input to later be passed into runElevatorMethod
-#   :param _startingFloor: Raw starting floor input that should be an int greater than 1
-#   :param _listOfFloors: Raw list of floors that should be a list of integers
+#   :param _startingFloor: Raw starting floor input that should be an int greater than 0
+#   :param _listOfFloors: Raw list of floors that should be a list of integers greater than 0
+#   :returns: error message string (empty if no error)
 def validateElevatorInputs(_startingFloor, _listOfFloors):
     # Validates starting floor input to make sure it is a non-negative, non-zero integer
     try:
@@ -41,7 +43,7 @@ def validateElevatorInputs(_startingFloor, _listOfFloors):
     try:
         for supposedFloorNum in _listOfFloors:
             integerFloor = int(supposedFloorNum)
-            if (integerFloor < 1):
+            if integerFloor < 1:
                 return "Floor " + supposedFloorNum + " is zero or negative, please choose a positive, non-negative floor."      
     except ValueError:
         return "Not all floors in list of floors are integers"
@@ -52,9 +54,11 @@ def validateElevatorInputs(_startingFloor, _listOfFloors):
 
 # Utility function that processes system argument input
 #   :param _sysArguments: all arguments passed in through the command line
+#   :returns: starting floor int, integer array of floors to travel to, error message string (empty if no error)
 def processInput(_sysArguments):
     # Store raw input for validation and further processing
     rawStringArrayOfFloors = _sysArguments[2:]
+    # we take the second arugment (position 1) because the first is the file name which we don't use
     rawFloorInput = _sysArguments[1]
     
     # Validate inputs
@@ -120,6 +124,7 @@ def runTestSuite():
 
 
 # Tests runElevator() method with various inputs and makes sure the outputs are correct (not-expansive)
+#   :returns: successes (int) and expected successes (int)    
 def runElevatorShouldReturnCorrectValues():
     
     print("Running test: runElevatorShouldReturnCorrectValues\n")
@@ -159,6 +164,7 @@ def runElevatorShouldReturnCorrectValues():
 
 
 # Test various valid and invalid arguements to make sure processInput() is returning correctly formated inputs
+#   :returns: successes (int) and expected successes (int)
 def processInputShouldProcessInputsCorrectly():
     
     print("Running test: processInputShouldErrorWhenPassedInvalidInputs\n")
@@ -197,6 +203,7 @@ def processInputShouldProcessInputsCorrectly():
                       ['', [], "Starting floor is not an integer."]]
     
     testNum = 0
+    # Iterate through both arrays at once
     for inputData, outputData in zip(testInputData, testOutputData):
         sampleOutputFirstFloor, sampleOutputFloorList, errorMsg = processInput(inputData)
         testNum = testNum + 1
