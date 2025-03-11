@@ -1,5 +1,11 @@
 import sys
 
+# Preset error messages
+STARTING_FLOOR_NEGATIVE_ERROR = "Starting floor is zero or negative, please choose a positive, non-negative starting floor."
+STARTING_FLOOR_NOT_INT_ERROR = "Starting floor is not an integer."
+FLOOR_LIST_NEGATIVE_ERROR = "A floor in your list is zero or negative, please choose a positive, non-negative floor. Floor #: " 
+FLOOR_LIST_NOT_INT_ERROR = "Not all floors in list of floors are integers"
+
 # Runs as simple elevator simulation that takes a starting floor and number of floors and returns
 # the total time (10 per floor) and all the floors that were traveled to
 #   :param _startingFloor: the starting floor number
@@ -35,18 +41,18 @@ def validateElevatorInputs(_startingFloor, _listOfFloors):
     try:
         intStartingFloor = int(_startingFloor)
         if intStartingFloor < 1:
-            return "Starting floor is zero or negative, please choose a positive, non-negative starting floor."
+            return STARTING_FLOOR_NEGATIVE_ERROR
     except ValueError:
-        return "Starting floor is not an integer."
+        return STARTING_FLOOR_NOT_INT_ERROR
 
     # Validates that list of floors are non-negative, non-zero integers
     try:
         for supposedFloorNum in _listOfFloors:
             integerFloor = int(supposedFloorNum)
             if integerFloor < 1:
-                return "Floor " + supposedFloorNum + " is zero or negative, please choose a positive, non-negative floor."      
+                return FLOOR_LIST_NEGATIVE_ERROR + str(supposedFloorNum)     
     except ValueError:
-        return "Not all floors in list of floors are integers"
+        return FLOOR_LIST_NOT_INT_ERROR
         
     # Returns empty string if validation successful
     return ''
@@ -194,13 +200,13 @@ def processInputShouldProcessInputsCorrectly():
                       [5, [100, 10, 1], ''],
                       [1000, [1, 1000, 1], ''],
                       # Errors
-                      ['', [], "Not all floors in list of floors are integers"],
-                      ['', [], "Starting floor is not an integer."],
-                      ['', [], "Starting floor is zero or negative, please choose a positive, non-negative starting floor."],
-                      ['', [], "Starting floor is zero or negative, please choose a positive, non-negative starting floor."],
-                      ['', [], "Floor -10 is zero or negative, please choose a positive, non-negative floor."],
-                      ['', [], "Not all floors in list of floors are integers"],
-                      ['', [], "Starting floor is not an integer."]]
+                      ['', [], FLOOR_LIST_NOT_INT_ERROR],
+                      ['', [], STARTING_FLOOR_NOT_INT_ERROR],
+                      ['', [], STARTING_FLOOR_NEGATIVE_ERROR],
+                      ['', [], STARTING_FLOOR_NEGATIVE_ERROR],
+                      ['', [], FLOOR_LIST_NEGATIVE_ERROR + str(testInputData[8][3])],
+                      ['', [], FLOOR_LIST_NOT_INT_ERROR],
+                      ['', [], STARTING_FLOOR_NOT_INT_ERROR]]
     
     testNum = 0
     # Iterate through both arrays at once
@@ -211,13 +217,13 @@ def processInputShouldProcessInputsCorrectly():
         # Print what we expected and what we got
         print("Input: " + str(inputData) + ".")
         
-        print("Expected starting floor: " + str(outputData[0]) + ".")
-        print("Expected list of floors: " + str(outputData[1]) + ".")
-        print("Expected error message: " + str(outputData[2]) + ".")
+        print("Expected starting floor: " + str(outputData[0]))
+        print("Expected list of floors: " + str(outputData[1]))
+        print("Expected error message: " + str(outputData[2]))
         
-        print("Actual starting floor: " + str(sampleOutputFirstFloor) + ".")
-        print("Actual list of floors: " + str(sampleOutputFloorList) + ".")
-        print("Actual error message: " + str(errorMsg) + ".")
+        print("Actual starting floor: " + str(sampleOutputFirstFloor))
+        print("Actual list of floors: " + str(sampleOutputFloorList))
+        print("Actual error message: " + str(errorMsg))
         
         # Tally successes
         if outputData[0] == sampleOutputFirstFloor and outputData[1] == sampleOutputFloorList and outputData[2] == errorMsg:
