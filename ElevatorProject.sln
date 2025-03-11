@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ElevatorProject", "ElevatorProject\ElevatorProject.pyproj", "{DBC51F3D-647D-4F09-9A71-51E707F2053B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBC51F3D-647D-4F09-9A71-51E707F2053B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC51F3D-647D-4F09-9A71-51E707F2053B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02B1D688-17BF-4CC9-BBF9-87D704BE2023}
+	EndGlobalSection
+EndGlobal
